@@ -89,7 +89,13 @@ As a registered / logged in user, in addition to the above, I want to be able to
 * #### Imagery
 
 ***
-### Database Design
+## Development Process
+
+* Trello Board has been used since the beginning of development to track progress, capture ideas, and make notes
+![trello board](docs/readme-img/trello-board.jpg)
+
+***
+## Database Design
 
 ***
 ## Features
