@@ -7,6 +7,17 @@
     <meta name="description" content="Yoga Hub. Community of yoga practitioners and teachers in Ireland. Find a class. Post a class."/>
     <meta name="keywords" content="yoga, class, hatha, vinyasa, meditation, Ireland, teacher, community, practice">
     <title>Yoga Hub</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" 
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" 
+        crossorigin="anonymous" referrerpolicy="no-referrer" type="text/css" />
+
+    <!-- Materialize CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" type="text/css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
 </head>
 <body>
 
@@ -17,5 +28,13 @@
 
     <!-- FOOTER GOES HERE -->
 
+    <!-- Materialize -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" 
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <!-- Link to JavaScript file & no script error -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <noscript>Your browser does not support JavaScript!</noscript>
 </body>
 </html>
