@@ -18,10 +18,9 @@ mongo = PyMongo(app)
 
 
 @app.route("/")
-@app.route("/events")
-def get_events():
-    events = mongo.db.events.find()
-    return render_template("events.html", events=events)
+@app.route("/home")
+def home():
+    return render_template("home.html")
 
 
 if __name__ == "__main__":
