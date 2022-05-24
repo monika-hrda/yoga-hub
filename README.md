@@ -127,7 +127,9 @@ As a registered / logged in user, in addition to the above, I want to be able to
 * [Git](https://git-scm.com/) - version control
 * [GitHub](https://github.com/) - to store the code for this project
 * [GitPod](https://www.gitpod.io/) - virtual IDE used to build this site
-* [jQuery](https://jquery.com/)
+* [Materialize](https://materializecss.com/) - a responsive front-end framework based on Material Design
+* [Font Awesome](https://fontawesome.com/) - to add icons to the site
+* [jQuery](https://jquery.com/) - JavaScript library
 * [Google DevTools](https://developer.chrome.com/docs/devtools/)
 * [Balsamiq](https://balsamiq.com/wireframes/) - to create wireframes
 * [Lucidchart](https://www.lucidchart.com/) - to create user journey (flowchart)

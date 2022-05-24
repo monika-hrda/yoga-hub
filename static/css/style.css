@@ -1,0 +1,23 @@
+/* ---------------------------------------- Variables */
+
+:root {
+    --violet-red: #B82677;
+    --opal: #A9D2CC;
+    --mandarin: #EB7545;
+    --cultured: #F4F5F7;
+    --raisin-black: #211F20;
+}
+
+/* ---------------------------------------- CSS Reset */
+
+h1, h2, h3, h4 {
+    color: var(--violet-red);
+}
+
+/* ---------------------------------------- Header */
+
+nav {
+    background: var(--violet-red);
+}
+
+
