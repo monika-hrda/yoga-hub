@@ -24,6 +24,13 @@ def home():
     return render_template("home.html")
 
 
+@app.route("/classes")
+def get_classes():
+    # list() will convert the Mongo Cursor Object into a proper list
+    classes = list(mongo.db.classes.find())
+    return render_template("classes.html", classes=classes)
+
+
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
