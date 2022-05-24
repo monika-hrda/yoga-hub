@@ -109,10 +109,28 @@ As a registered / logged in user, in addition to the above, I want to be able to
 
 ### Languages Used
 
+* HTML5
+* CSS3
+* JavaScript
+* Python3
+
 ### Frameworks, Libraries & Programs Used
 
+* [Heroku](https://heroku.com/) - to deploy the live site
+* [MongoDB](https://www.mongodb.com/) - to host the database
+* [Flask](https://flask.palletsprojects.com/en/2.1.x/) - micro web framework written in Python
+* [Flask-PyMongo](https://pypi.org/project/Flask-PyMongo/) - to connect the app to MongoDB
+* [Jinja](https://jinja.palletsprojects.com/en/3.0.x/) - extensible templating engine 
+* [Werkzeug](https://werkzeug.palletsprojects.com/en/2.1.x/) - WSGI web application library
+* [pip](https://pip.pypa.io/en/stable/) - to install dependencies for the site
+* [dnspython](https://www.dnspython.org/) - DNS toolkit for Python
+* [Git](https://git-scm.com/) - version control
+* [GitHub](https://github.com/) - to store the code for this project
+* [GitPod](https://www.gitpod.io/) - virtual IDE used to build this site
+* [Google DevTools](https://developer.chrome.com/docs/devtools/)
 * [Balsamiq](https://balsamiq.com/wireframes/) - to create wireframes
 * [Lucidchart](https://www.lucidchart.com/) - to create user journey (flowchart)
+* [Trello](https://www.trello.com/) - to project manage, Kanban-style
 
 ***
 ## Testing
