@@ -35,6 +35,11 @@ def register():
             flash("Username already exists")
             return redirect(url_for("register"))
 
+        # check if both entered passwords match
+        if request.form.get("password") != request.form.get("password_confirm"):
+            flash("Your passwords don't match. Try again!")
+            return redirect(url_for("register"))
+
         register = {
             "username": request.form.get("username").lower(),
             "password": generate_password_hash(request.form.get("password"))
@@ -43,7 +48,7 @@ def register():
 
         # put the new user into 'session' cookie
         session["user"] = request.form.get("username").lower()
-        flash("Registration Successful!")
+        flash("Registration successful!")
     return render_template("register.html")
 
 
