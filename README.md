@@ -144,6 +144,12 @@ As a registered / logged in user, in addition to the above, I want to be able to
 
 ### Continuous Testing - Issues and Resolutions to issues found during testing
 
+During the development process, the application was continuously tested and bugs and issues that were found were resolved. A few examples:
+
+* When a logged in user typed in url address looking to get to another user's profile, or the username in the typed url did not exist / user was deleted, they were still sent to their profile page (see the screenshot below). If the user was not logged in and typed a url aiming to get to a profile page, an internal server error was triggered. This was corrected by checking whether the username from the url exists, and whether it matches the username of the logged in user. The user was then redirected appropriately. 
+Bug showing username in url not matching logged in user's username:
+![bug showing username in url not matching logged in user's username](docs/readme-img/profile-page-bug.jpg)
+
 ### Known Bugs and Issues
 
 ***

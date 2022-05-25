@@ -95,14 +95,28 @@ def login():
 
 @app.route("/profile/<username>", methods=["GET", "POST"])
 def profile(username):
-    # grab the session user's username from db
-    username = mongo.db.users.find_one(
-        {"username": session["user"]})["username"]
+    try:
+        # grab the session user's username from db
+        username_in_session = mongo.db.users.find_one(
+            {"username": session["user"]})["username"]
+    except BaseException:
+        # if the user is not logged in
+        return redirect(url_for("login"))
 
-    if session["user"]:
-        return render_template("profile.html", username=username)
+    try:
+        # grab the url username from db
+        username_url = mongo.db.users.find_one(
+            {"username": username})["username"]
+    except BaseException:
+        # if the url username does not exist
+        flash(f"Oops, that is not your username!")
+        return redirect(url_for("home"))
 
-    return redirect(url_for("login"))
+    if username_url == username_in_session:
+        return render_template(
+            "profile.html", username=username_in_session)
+    flash(f"Oops, you are not logged in as {username_url}!")
+    return redirect(url_for("home"))
 
 
 @app.route("/logout")
