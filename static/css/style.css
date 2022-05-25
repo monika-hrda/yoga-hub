@@ -48,3 +48,9 @@ button.btn-large, button::after {
     background: var(--opal);
 }
 
+/* ---------------------------------------- Collapsible component */
+
+.collapsible-header {
+    background: var(--violet-red);
+}
+

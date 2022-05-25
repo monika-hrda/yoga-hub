@@ -3,4 +3,31 @@
 
     <h2 class="center-align">Classes</h2>
 
+    <ul class="collapsible">
+        {% for class in classes %}
+        <li>
+            <div class="collapsible-header white-text">
+                <div class="s9">
+                    <strong>{{ class.class_style }} | {{ class.class_name }}  </strong>
+                    {% if class.is_online == "on" %}
+                        <i class="fa-solid fa-desktop tooltipped" data-position="right" data-tooltip="online"></i>
+                    {% endif %}
+                    <br>
+                    {{ class.date }}
+                </div>
+                <div class="s3">
+                    <i class="fa-solid fa-caret-down"></i>
+                </div>
+            </div>
+            <div class="collapsible-body">
+                <p>{{ class.description }}</p>
+                <p>Location: {{ class.location }}</p>
+                <p>Price: {{ class.price }}</p>
+                <p>Contact: {{ class.contact }}</p>
+                <p>Teacher: {{ class.created_by }}</p>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+
 {% endblock %}
