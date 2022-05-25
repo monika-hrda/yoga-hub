@@ -48,9 +48,26 @@ button.btn-large, button::after {
     background: var(--opal);
 }
 
-/* ---------------------------------------- Collapsible component */
+/* ---------------------------------------- Classes on Cards */
 
-.collapsible-header {
-    background: var(--violet-red);
+.card-content .fa-solid {
+    color: var(--violet-red);
 }
 
+.card-content p {
+    padding: 3px 0;
+}
+
+.card-reveal .fa-solid {
+    color: var(--violet-red);
+    padding-right: 10px;
+}
+
+.card-reveal .fa-info {
+    padding-right: 15px;
+}
+
+.card-action .activator {
+    color: var(--violet-red);
+    cursor: pointer;
+}

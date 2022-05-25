@@ -3,31 +3,41 @@
 
     <h2 class="center-align">Classes</h2>
 
-    <ul class="collapsible">
+    <div class="row">
         {% for class in classes %}
-        <li>
-            <div class="collapsible-header white-text">
-                <div class="s9">
-                    <strong>{{ class.class_style }} | {{ class.class_name }}  </strong>
-                    {% if class.is_online == "on" %}
-                        <i class="fa-solid fa-desktop tooltipped" data-position="right" data-tooltip="online"></i>
-                    {% endif %}
-                    <br>
-                    {{ class.date }}
-                </div>
-                <div class="s3">
-                    <i class="fa-solid fa-caret-down"></i>
+            <div class="card-container col s12 m6 l4">
+                <div class="card large">
+                    <div class="card-image">
+                        <img src="static/images/class-style.jpg" alt="yoga class image">
+                    </div>
+                    <div class="card-content activator">
+                        <span class="card-title activator grey-text text-darken-4">{{ class.class_name }}</span>
+                        <p>
+                            <strong>{{ class.class_style }}</strong>
+                        </p>
+                        <p>
+                            {{ class.date }}
+                            {% if class.is_online == "on" %}
+                                <i class="fa-solid fa-desktop fa-lg tooltipped right" data-position="left" data-tooltip="online"></i>
+                            {% endif %}
+                        </p>
+                    </div>
+                    <div class="card-action">
+                        <span class="activator">MORE INFO <i class="fa-solid fa-arrow-right-long"></i></span>
+                    </div>
+                    <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4">{{ class.class_name }}<i class="fa-solid fa-xmark right"></i></span>
+                        <hr>
+                        <p><em>{{ class.description }}</em></p>
+                        <hr>
+                        <p><i class="fa-solid fa-location-dot fa-lg"></i>  {{ class.location }}</p>
+                        <p><i class="fa-solid fa-euro-sign fa-lg"></i>  {{ class.price }}</p>
+                        <p><i class="fa-solid fa-info fa-lg"></i>  {{ class.contact }}</p>
+                        <p><i class="fa-solid fa-person fa-lg"></i>  {{ class.created_by }}</p>
+                    </div>
                 </div>
             </div>
-            <div class="collapsible-body">
-                <p>{{ class.description }}</p>
-                <p>Location: {{ class.location }}</p>
-                <p>Price: {{ class.price }}</p>
-                <p>Contact: {{ class.contact }}</p>
-                <p>Teacher: {{ class.created_by }}</p>
-            </div>
-        </li>
         {% endfor %}
-    </ul>
+    </div>
 
 {% endblock %}
