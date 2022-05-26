@@ -54,7 +54,8 @@ def register():
 
         register = {
             "username": username,
-            "password": generate_password_hash(password)
+            "password": generate_password_hash(password),
+            "is_teacher": "no"
         }
         mongo.db.users.insert_one(register)
 
@@ -125,6 +126,11 @@ def logout():
     flash("You have been logged out")
     session.pop("user")
     return redirect(url_for("login"))
+
+
+@app.route("/add_class")
+def add_class():
+    return render_template("add_class.html")
 
 
 if __name__ == "__main__":

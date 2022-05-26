@@ -32,7 +32,7 @@
                     <li><a href="{{ url_for('get_classes') }}">Classes</a></li>
                     {% if session.user %}
                         <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
-                        <li><a href="#">New Class</a></li>
+                        <li><a href="{{ url_for('add_class') }}">Add Class</a></li>
                         <li><a href="{{ url_for('logout') }}">Log Out</a></li>
                     {% else %} 
                         <li><a href="{{ url_for('login') }}">Log In</a></li>
@@ -50,7 +50,7 @@
             <li><a href="{{ url_for('get_classes') }}">Classes</a></li>
             {% if session.user %}
                 <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
-                <li><a href="#">New Class</a></li>
+                <li><a href="{{ url_for('add_class') }}">Add Class</a></li>
                 <li><a href="{{ url_for('logout') }}">Log Out</a></li>
             {% else %} 
                 <li><a href="{{ url_for('login') }}">Log In</a></li>
