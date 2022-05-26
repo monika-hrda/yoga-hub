@@ -32,7 +32,7 @@
                 <div class="card-container col s12 m6 l4">
                     <div class="card large">
                         <div class="card-image">
-                            <img src="static/images/class-style.jpg" alt="yoga class image">
+                            <img src="{{ url_for('static', filename='images/class-style.jpg') }}" alt="yoga class image">
                         </div>
                         <div class="card-content activator">
                             <span class="card-title activator grey-text text-darken-4">{{ class.class_name }}</span>

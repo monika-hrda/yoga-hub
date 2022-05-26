@@ -113,11 +113,18 @@ def profile(username):
         flash(f"Oops, that is not your username!")
         return redirect(url_for("home"))
 
-    if username_url == username_in_session:
-        return render_template(
-            "profile.html", username=username_in_session)
-    flash(f"Oops, you are not logged in as {username_url}!")
-    return redirect(url_for("home"))
+    if username_url != username_in_session:
+        flash(f"Oops, you are not logged in as {username_url}!")
+        return redirect(url_for("home"))
+
+    profile_classes = list(mongo.db.classes.find(
+        {"created_by": username_in_session}))
+
+    return render_template(
+            "profile.html", 
+            username=username_in_session, 
+            profile_classes=profile_classes
+        )
 
 
 @app.route("/logout")
