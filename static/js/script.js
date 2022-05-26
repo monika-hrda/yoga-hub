@@ -6,7 +6,7 @@ $(document).ready(function () {
     $(".sidenav").sidenav({edge: "right"});
     $(".collapsible").collapsible();
     $(".tooltipped").tooltip();
-    $('input#class_name, textarea#description').characterCounter();
+    $('input#class_name, textarea#description, input#location').characterCounter();
     $(".datepicker").datepicker({
         format: "dd mmmm, yyyy",
         firstDay: 1,
@@ -20,6 +20,8 @@ $(document).ready(function () {
     });
     $("select").formSelect();
 
+
+    // code for custom Materialize select validation from Task Manager walkthrough (Tim Nelson)
     validateMaterializeSelect();
 
     function validateMaterializeSelect() {

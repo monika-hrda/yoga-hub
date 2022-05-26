@@ -48,7 +48,21 @@ button.btn-large, button::after {
     background: var(--opal);
 }
 
-/* ---------------------------------------- Classes on Cards */
+/* ---------------------------------------- Search area */
+
+.search-button-field, .search-input-field {
+    display: inline-block;
+}
+
+.search-input-field {
+    width: 70%;
+}
+
+.search-area {
+    margin:auto;
+}
+
+/* ---------------------------------------- Yoga Classes on Cards */
 
 .card-content .fa-solid {
     color: var(--violet-red);
