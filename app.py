@@ -130,7 +130,8 @@ def logout():
 
 @app.route("/add_class")
 def add_class():
-    return render_template("add_class.html")
+    styles = mongo.db.styles.find().sort("class_style", 1)
+    return render_template("add_class.html", styles=styles)
 
 
 if __name__ == "__main__":
