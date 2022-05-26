@@ -152,6 +152,13 @@ def add_class():
     return render_template("add_class.html", styles=styles)
 
 
+@app.route("/search", methods=["GET", "POST"])
+def search():
+    query = request.form.get("query")
+    classes = list(mongo.db.classes.find({"$text": {"$search": query}}))
+    return render_template("classes.html", classes=classes)
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
