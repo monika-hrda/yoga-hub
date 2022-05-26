@@ -10,9 +10,13 @@
                 <div class="input-field col s12">
                     <i class="fas fa-folder-open prefix"></i>
                     <select id="class_style" name="class_style" class="validate" required>
-                        <option value="" disabled selected>Choose Style</option>
+                        <option value="" disabled>Choose Style</option>
                         {% for style in styles %}
-                            <option value="{{ style.class_style }}">{{ style.class_style }}</option>
+                            {% if style.class_style == edited_class.class_style %}
+                                <option value="{{ style.class_style }}" selected>{{ style.class_style }}</option>
+                            {% else %}
+                                <option value="{{ style.class_style }}">{{ style.class_style }}</option>
+                            {% endif %}
                         {% endfor %}
                     </select>
                     <label for="class_style">Class Style</label>
@@ -23,7 +27,8 @@
                 <div class="input-field col s12">
                     <i class="fas fa-pencil-alt prefix"></i>
                     <input id="class_name" name="class_name" minlength="5" maxlength="35" type="text" 
-                        pattern="^[a-zA-Z0-9,. ]{5,35}$" class="validate" data-length="35" required>
+                        pattern="^[a-zA-Z0-9,. ]{5,35}$" class="validate" value="{{ edited_class.class_name }}" 
+                        data-length="35" required>
                     <label for="class_name" class="active">Class Name</label>
                 </div>
             </div>
@@ -31,7 +36,8 @@
             <div class="row">
                 <div class="input-field col s12">
                     <i class="fas fa-calendar-alt prefix"></i>
-                    <input id="date" name="date" type="text" class="datepicker validate" required>
+                    <input id="date" name="date" type="text" class="datepicker validate" 
+                        value="{{ edited_class.date }}" required>
                     <label for="date" class="active">Date</label>
                 </div>
             </div>
@@ -41,7 +47,11 @@
                     <div class="switch">
                         <i class="fas fa-desktop prefix"></i>
                         <label for="is_online">
-                            <input type="checkbox" id="is_online" name="is_online">
+                            {% if edited_class.is_online == "yes" %}
+                                <input type="checkbox" id="is_online" name="is_online" checked>
+                            {% else %}
+                                <input type="checkbox" id="is_online" name="is_online">
+                            {% endif %}
                             <span class="lever"></span>
                             Is Online
                         </label>
@@ -53,7 +63,7 @@
                 <div class="input-field col s12">
                     <i class="fas fa-solid fa-location-dot prefix"></i>
                     <input id="location" name="location" minlength="4" maxlength="30" type="text" 
-                        class="validate" data-length="30" required>
+                        class="validate" data-length="30" value="{{ edited_class.location }}" required>
                     <label for="location" class="active">Class Location (video platform if online)</label>
                 </div>
             </div>
@@ -62,7 +72,7 @@
                 <div class="input-field col s12">
                     <i class="fas fa-solid fa-euro-sign prefix"></i>
                     <input id="price" name="price" minlength="1" maxlength="4" type="text" 
-                        pattern="^[0-9,.]{1,7}$" class="validate" required>
+                        pattern="^[0-9,.]{1,7}$" class="validate" value="{{ edited_class.price }}" required>
                     <label for="price" class="active">Price</label>
                 </div>
             </div>
@@ -70,8 +80,11 @@
             <div class="row">
                 <div class="input-field col s12">
                     <i class="fas fa-align-left prefix"></i>
+                    <!-- inserted 'minus' for Jinja to remove the whitespace before and/or after -->
                     <textarea id="description" name="description" minlength="5" maxlength="200"
-                        class="materialize-textarea validate" data-length="200" required></textarea>
+                        class="materialize-textarea validate" data-length="200" required>
+                        {{- edited_class.description -}}
+                    </textarea>
                     <label for="description" class="active">Class Description</label>
                 </div>
             </div>
@@ -79,7 +92,8 @@
             <div class="row">
                 <div class="input-field col s12">
                     <i class="fas fa-solid fa-at prefix"></i>
-                    <input id="contact" name="contact" type="email" class="validate" required>
+                    <input id="contact" name="contact" type="email" class="validate" 
+                        value="{{ edited_class.contact }}" required>
                     <label for="contact" class="active">Contact Email</label>
                 </div>
             </div>
