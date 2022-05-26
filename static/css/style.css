@@ -14,8 +14,23 @@ h1, h2, h3, h4 {
     color: var(--violet-red);
 }
 
+/* ---------------------------------------- Special text/paddings/margins */
+
 .fas, .fas::before {
     color: var(--violet-red);
+}
+
+h2 {
+    margin-bottom: 50px;
+}
+
+.card-panel {
+    padding: 10% 10% 2% 10%;
+}
+
+.profile-card {
+    padding: 2% 10%;
+    margin-top: 10px;
 }
 
 /* ---------------------------------------- Header */
@@ -26,6 +41,10 @@ nav {
 
 a.brand-logo, nav li a {
     color: var(--violet-red);
+}
+
+nav .nav-wrapper {
+    padding: 0 2%;
 }
 
 /* ---------------------------------------- Buttons */
