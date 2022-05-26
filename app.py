@@ -161,6 +161,23 @@ def add_class():
 
 @app.route("/edit_class/<class_id>", methods=["GET", "POST"])
 def edit_class(class_id):
+    if request.method == "POST":
+        is_online = "yes" if request.form.get("is_online") else "no"
+        submit = {
+            "class_name": request.form.get("class_name"),
+            "class_style": request.form.get("class_style"),
+            "description": request.form.get("description"),
+            "date": request.form.get("date"),
+            "is_online": is_online,
+            "location": request.form.get("location"),
+            "price": request.form.get("price"),
+            "contact": request.form.get("contact"),
+            "created_by": session["user"]
+        }
+        mongo.db.classes.update_one(
+            {"_id": ObjectId(class_id)}, {"$set": submit})
+        flash("Class Successfully Updated")
+
     edited_class = mongo.db.classes.find_one({"_id": ObjectId(class_id)})
     styles = mongo.db.styles.find().sort("class_style", 1)
     return render_template(
