@@ -128,8 +128,26 @@ def logout():
     return redirect(url_for("login"))
 
 
-@app.route("/add_class")
+@app.route("/add_class", methods=["GET", "POST"])
 def add_class():
+    if request.method == "POST":
+        is_online = "yes" if request.form.get("is_online") else "no"
+        new_class = {
+            "class_name": request.form.get("class_name"),
+            "class_style": request.form.get("class_style"),
+            "description": request.form.get("description"),
+            "date": request.form.get("date"),
+            "is_online": is_online,
+            "location": request.form.get("location"),
+            "price": request.form.get("price"),
+            "contact": request.form.get("contact"),
+            "created_by": session["user"]
+        }
+
+        mongo.db.classes.insert_one(new_class)
+        flash("Class Added Successfully")
+        return redirect(url_for("get_classes"))
+
     styles = mongo.db.styles.find().sort("class_style", 1)
     return render_template("add_class.html", styles=styles)
 
