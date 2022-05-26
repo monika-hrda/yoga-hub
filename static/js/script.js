@@ -19,6 +19,7 @@ $(document).ready(function () {
         autoClose: true
     });
     $("select").formSelect();
+    $('.modal').modal();
 
 
     // code for custom Materialize select validation from Task Manager walkthrough (Tim Nelson)
