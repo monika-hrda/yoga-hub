@@ -187,6 +187,13 @@ def edit_class(class_id):
         )
 
 
+@app.route("/delete_class/<class_id>")
+def delete_class(class_id):
+    mongo.db.classes.delete_one({"_id": ObjectId(class_id)})
+    flash("Class Successfully Deleted")
+    return redirect(url_for("profile", username=session["user"]))
+
+
 @app.route("/search", methods=["GET", "POST"])
 def search():
     query = request.form.get("query")
