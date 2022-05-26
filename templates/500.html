@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+
+    
+        <h2 class="center-align">Error 500</h2>
+
+        <div class="center-align">
+            <p>
+                <h5>Lost?</h5>
+            </p>
+            <p>
+                <h5>There's no place like <a href="{{ url_for('home') }}">home</a>!</h5>
+            </p>
+            <p>
+                <h5>Unless it's a yoga class. Then come to a <a href="{{ url_for('get_classes') }}">yoga class</a>.</h5>
+            </p>
+        </div>
+
+{% endblock %}
