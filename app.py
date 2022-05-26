@@ -159,6 +159,17 @@ def add_class():
     return render_template("add_class.html", styles=styles)
 
 
+@app.route("/edit_class/<class_id>", methods=["GET", "POST"])
+def edit_class(class_id):
+    edited_class = mongo.db.classes.find_one({"_id": ObjectId(class_id)})
+    styles = mongo.db.styles.find().sort("class_style", 1)
+    return render_template(
+            "edit_class.html",
+            edited_class=edited_class,
+            styles=styles
+        )
+
+
 @app.route("/search", methods=["GET", "POST"])
 def search():
     query = request.form.get("query")

@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <h2 class="center-align">Edit Class</h2>
+
+    <div class="row card-panel">
+        <form class="col s12" method="POST" action="{{ url_for('edit_class', class_id=edited_class._id) }}">
+            <!-- category selection -->
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="fas fa-folder-open prefix"></i>
+                    <select id="class_style" name="class_style" class="validate" required>
+                        <option value="" disabled selected>Choose Style</option>
+                        {% for style in styles %}
+                            <option value="{{ style.class_style }}">{{ style.class_style }}</option>
+                        {% endfor %}
+                    </select>
+                    <label for="class_style">Class Style</label>
+                </div>
+            </div>
+            <!-- class name -->
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="fas fa-pencil-alt prefix"></i>
+                    <input id="class_name" name="class_name" minlength="5" maxlength="35" type="text" 
+                        pattern="^[a-zA-Z0-9,. ]{5,35}$" class="validate" data-length="35" required>
+                    <label for="class_name" class="active">Class Name</label>
+                </div>
+            </div>
+            <!-- date picker -->
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="fas fa-calendar-alt prefix"></i>
+                    <input id="date" name="date" type="text" class="datepicker validate" required>
+                    <label for="date" class="active">Date</label>
+                </div>
+            </div>
+            <!-- is online toggle -->
+            <div class="row">
+                <div class="input-field col s12">
+                    <div class="switch">
+                        <i class="fas fa-desktop prefix"></i>
+                        <label for="is_online">
+                            <input type="checkbox" id="is_online" name="is_online">
+                            <span class="lever"></span>
+                            Is Online
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <!-- location -->
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="fas fa-solid fa-location-dot prefix"></i>
+                    <input id="location" name="location" minlength="4" maxlength="30" type="text" 
+                        class="validate" data-length="30" required>
+                    <label for="location" class="active">Class Location (video platform if online)</label>
+                </div>
+            </div>
+            <!-- price -->
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="fas fa-solid fa-euro-sign prefix"></i>
+                    <input id="price" name="price" minlength="1" maxlength="4" type="text" 
+                        pattern="^[0-9,.]{1,7}$" class="validate" required>
+                    <label for="price" class="active">Price</label>
+                </div>
+            </div>
+            <!-- class description -->
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="fas fa-align-left prefix"></i>
+                    <textarea id="description" name="description" minlength="5" maxlength="200"
+                        class="materialize-textarea validate" data-length="200" required></textarea>
+                    <label for="description" class="active">Class Description</label>
+                </div>
+            </div>
+            <!-- contact -->
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="fas fa-solid fa-at prefix"></i>
+                    <input id="contact" name="contact" type="email" class="validate" required>
+                    <label for="contact" class="active">Contact Email</label>
+                </div>
+            </div>
+            <!-- submit button -->
+            <div class="row center-align">
+                <a href="{{ url_for('profile', username=session['user']) }}" class="btn-large red">
+                    Cancel
+                </a>
+                <button type="submit" class="btn-large light-blue darken-1 white-text">Edit Class</button>
+            </div>
+            </form>
+    </div>
+
+{% endblock %}
