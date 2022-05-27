@@ -80,4 +80,14 @@
         <h3 class="center-align">No Classes Scheduled</h3>
     {% endif %}
 
+    <!-- PAGINATION CONTAINER -->
+    <div class="center-align">
+        <div class="pagination center-align">
+            {% if profile_classes|length > 0 %}
+                {{ pagination.links }}
+                {{ pagination.info }}
+            {% endif %}
+        </div>
+    </div>
+
 {% endblock %}

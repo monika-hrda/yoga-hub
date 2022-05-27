@@ -137,14 +137,22 @@ def profile(username):
         flash(f"Oops, you are not logged in as {username_url}!")
         return redirect(url_for("home"))
 
-    profile_classes = list(mongo.db.classes.find(
-        {"created_by": username_in_session}))
+    page = request.args.get('page', type=int, default=1)
+    profile_classes = mongo.db.classes.find(
+        {"created_by": username_in_session}).skip(
+            (page-1)*PER_PAGE).limit(PER_PAGE)
+    total = mongo.db.classes.count_documents(
+        {"created_by": username_in_session})
+    pagination = Pagination(
+        per_page=PER_PAGE, page=page, total=total, record_name='classes'
+    )
 
     return render_template(
-            "profile.html", 
-            username=username_in_session, 
-            profile_classes=profile_classes
-        )
+        "profile.html",
+        username=username_in_session,
+        profile_classes=list(profile_classes),
+        pagination=pagination
+    )
 
 
 @app.route("/logout")
