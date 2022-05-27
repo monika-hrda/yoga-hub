@@ -117,7 +117,7 @@ button.btn-large, button::after {
 
 /* ---------------------------------------- Pagination */
 
-.pagination   {
+.pagination {
     height: 40px;
     line-height: 40px;
     margin-top: 0px;
@@ -127,4 +127,15 @@ button.btn-large, button::after {
 
 .pagination li {
     height: unset;
+}
+
+.pagination a:not(.active) {
+    padding: 4px 15px 6px;
+    margin: 0 5px;
+    border-radius: 2px;
+    vertical-align: top;
+}
+
+.pagination .active .page-link {
+    padding: 4px 10px;
 }
