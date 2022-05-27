@@ -22,7 +22,7 @@
 <body>
 
     <header>
-        <!-- main navbar -->
+        <!-- MAIN NAVBAR -->
         <nav>
             <div class="nav-wrapper">
                 <a href="{{ url_for('home') }}" class="brand-logo">Yoga Hub</a>
@@ -42,7 +42,7 @@
             </div>
         </nav>
 
-        <!-- mobile sidenav -->
+        <!-- MOBILE SIDENAV -->
         <ul class="sidenav" id="mobile-demo">
             <li>
                 <h4 class="center-align">Yoga Hub</h4>
@@ -59,25 +59,58 @@
         </ul>
     </header>
 
-    <section>
-        <!-- flash messages -->
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                {% for message in messages %}
-                    <div class="row flashes">
-                        <h5 class="center-align">{{ message }}</h5>
-                    </div>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
-    </section>
-
     <main class="container">
+
+        <section>
+            <!-- FLASH MESSAGES -->
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="row flashes">
+                            <h5 class="center-align">{{ message }}</h5>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </section>
+
         {% block content %}
         {% endblock %}
+
     </main>
 
-    <!-- FOOTER GOES HERE -->
+    <!-- FOOTER -->
+    <footer class="footer-container">
+        <div class="row footer-div">
+            <div class="col s12 m6">
+                <p class="copyright">
+                    &copy; 2022 Monika Hrda
+                </p>
+            </div>
+            <div class="col s12 m6">
+                <ul class="social-links right-align">
+                    <li>
+                        <a href="https://www.facebook.com/" target="_blank" rel="noopener">
+                            <i class="fab fa-facebook-square" aria-hidden="true"></i>
+                            <span class="sr-only">Facebook</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.instagram.com/" target="_blank" rel="noopener">
+                            <i class="fab fa-instagram" aria-hidden="true"></i>
+                            <span class="sr-only">Instagram</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.youtube.com/" target="_blank" rel="noopener">
+                            <i class="fab fa-youtube" aria-hidden="true"></i>
+                            <span class="sr-only">YouTube</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </footer>
 
     <!-- Materialize -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" 

@@ -10,6 +10,17 @@
 
 /* ---------------------------------------- CSS Reset */
 
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+
+main {
+    flex-grow: 1;
+}
+
 h1, h2, h3, h4, h5 {
     color: var(--violet-red);
 }
@@ -118,7 +129,6 @@ button.btn-large, button::after {
 /* ---------------------------------------- Pagination */
 
 .pagination {
-    height: 40px;
     line-height: 40px;
     margin-top: 0px;
     display: inline-block;
@@ -127,6 +137,10 @@ button.btn-large, button::after {
 
 .pagination li {
     height: unset;
+}
+
+.pagination li.active {
+    background-color: var(--violet-red);
 }
 
 .pagination a:not(.active) {
@@ -138,4 +152,41 @@ button.btn-large, button::after {
 
 .pagination .active .page-link {
     padding: 4px 10px;
+}
+
+/* ---------------------------------------- Footer */
+
+.footer-container {
+    background-color: var(--violet-red);
+    color: white;
+    min-height: 60px;
+    padding: 15px;
+    margin-top: 40px;
+}
+
+.footer-div {
+    padding: 0 50px;
+}
+
+.social-links li {
+    display: inline-block;
+    margin: 0 20px;
+}
+
+.social-links i {
+    color: white;
+    font-size: 20px;
+}
+
+/* ---------------------------------------- Media queries */
+
+@media only screen and (max-width: 598px) {
+    .footer-div {
+        padding: 0;
+        text-align: center;
+    }
+
+    ul.social-links {
+        text-align: center;
+    }
 }
