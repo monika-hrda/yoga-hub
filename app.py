@@ -17,6 +17,7 @@ app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
 app.secret_key = os.environ.get("SECRET_KEY")
 
 mongo = PyMongo(app)
+cached_query = ""
 
 
 @app.route("/")
@@ -216,7 +217,14 @@ def delete_class(class_id):
 
 @app.route("/search", methods=["GET", "POST"])
 def search():
+    global cached_query
     query = request.form.get("query")
+
+    if query:
+        cached_query = query
+    else:
+        query = cached_query
+
     page = request.args.get('page', type=int, default=1)
 
     per_page = 9
