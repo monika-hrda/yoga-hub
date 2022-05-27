@@ -18,6 +18,7 @@ app.secret_key = os.environ.get("SECRET_KEY")
 
 mongo = PyMongo(app)
 cached_query = ""
+PER_PAGE = 6
 
 
 @app.route("/")
@@ -32,19 +33,17 @@ def get_classes():
     # get the page parameter from the query string in the url
     page = request.args.get('page', type=int, default=1)
 
-    per_page = 9
-
     # get the clases only for the page requested, since results start at 0,
     # and the page is 1, we need to reset the skip to page - 1 
     # and then mutltiply by the classes per page
-    classes = mongo.db.classes.find({}).skip((page-1)*per_page).limit(per_page)
+    classes = mongo.db.classes.find({}).skip((page-1)*PER_PAGE).limit(PER_PAGE)
 
     # count total number of classes / documents
     total = mongo.db.classes.count_documents({})
 
     # set the page parameters
     pagination = Pagination(
-        per_page=per_page, page=page, total=total, record_name='classes'
+        per_page=PER_PAGE, page=page, total=total, record_name='classes'
     )
 
     return render_template(
@@ -227,14 +226,12 @@ def search():
 
     page = request.args.get('page', type=int, default=1)
 
-    per_page = 9
-
     classes = list(mongo.db.classes.find(
-        {"$text": {"$search": query}}).skip((page-1)*per_page).limit(per_page))
+        {"$text": {"$search": query}}).skip((page-1)*PER_PAGE).limit(PER_PAGE))
     total = len(list(mongo.db.classes.find({"$text": {"$search": query}})))
 
     pagination = Pagination(
-        per_page=per_page, page=page, total=total, record_name='classes'
+        per_page=PER_PAGE, page=page, total=total, record_name='classes'
     )
 
     return render_template(
