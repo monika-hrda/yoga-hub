@@ -68,11 +68,13 @@
     {% endif %}
 
     <!-- PAGINATION CONTAINER -->
-    <div class="pagination">
-        {% if classes|length > 0 %}
-            {{ pagination.links }}
-            {{ pagination.info }}
-        {% endif %}
+    <div class="center-align">
+        <div class="pagination center-align">
+            {% if classes|length > 0 %}
+                {{ pagination.links }}
+                {{ pagination.info }}
+            {% endif %}
+        </div>
     </div>
 
 {% endblock %}
