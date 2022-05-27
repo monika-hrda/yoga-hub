@@ -85,7 +85,10 @@
             </div>
             <!-- submit button -->
             <div class="row center-align">
-                <button type="submit" class="btn-large">Add Class</button>
+                <a href="{{ url_for('profile', username=session['user']) }}" class="btn-large red">
+                    Cancel
+                </a>
+                <button type="submit" class="btn-large light-blue darken-1 white-text">Add Class</button>
             </div>
             </form>
     </div>

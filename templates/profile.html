@@ -17,6 +17,10 @@
     </div>
 
     <!-- LOGGED IN USER'S DISPLAY OF CLASSES -->
+    <h4 class="center-align">
+        {{ username|capitalize }}'s Classes
+    </h4>
+
     {% if profile_classes|length > 0 %}
         <div class="row">
             {% for profile_class in profile_classes %}
