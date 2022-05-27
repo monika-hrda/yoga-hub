@@ -159,6 +159,11 @@ During the development process, the application was continuously tested and bugs
 
 ### Code
 
+* project is based on and developed from [Code Institute](https://codeinstitute.net/)'s walkthrough Flask Task Manager
+* [Materialize documentation](https://materializecss.com/) with code snippets
+* [Materialize on GitHub](https://github.com/Dogfalo/materialize)
+* [MongoDB documentation](https://www.mongodb.com/docs/)
+
 ### Content
 
 ### Media

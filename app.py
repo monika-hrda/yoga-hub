@@ -5,6 +5,7 @@ from flask import (
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_paginate import Pagination
 if os.path.exists("env.py"):
     import env
 
@@ -26,9 +27,28 @@ def home():
 
 @app.route("/classes")
 def get_classes():
-    # list() will convert the Mongo Cursor Object into a proper list
-    classes = list(mongo.db.classes.find())
-    return render_template("classes.html", classes=classes)
+
+    # get the page parameter from the query string in the url
+    page = request.args.get('page', type=int, default=1)
+
+    per_page = 9
+
+    # get the clases only for the page requested, since results start at 0,
+    # and the page is 1, we need to reset the skip to page - 1 
+    # and then mutltiply by the classes per page
+    classes = mongo.db.classes.find({}).skip((page-1)*per_page).limit(per_page)
+
+    # count total number of classes / documents
+    total = mongo.db.classes.count_documents({})
+
+    # set the page parameters
+    pagination = Pagination(
+        per_page=per_page, page=page, total=total, record_name='classes'
+    )
+
+    return render_template(
+        "classes.html", classes=list(classes),  pagination=pagination
+    )
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -197,8 +217,21 @@ def delete_class(class_id):
 @app.route("/search", methods=["GET", "POST"])
 def search():
     query = request.form.get("query")
-    classes = list(mongo.db.classes.find({"$text": {"$search": query}}))
-    return render_template("classes.html", classes=classes)
+    page = request.args.get('page', type=int, default=1)
+
+    per_page = 9
+
+    classes = list(mongo.db.classes.find(
+        {"$text": {"$search": query}}).skip((page-1)*per_page).limit(per_page))
+    total = len(list(mongo.db.classes.find({"$text": {"$search": query}})))
+
+    pagination = Pagination(
+        per_page=per_page, page=page, total=total, record_name='classes'
+    )
+
+    return render_template(
+        "classes.html", classes=classes,  pagination=pagination
+    )
 
 
 # 404 error (page not found)
@@ -216,4 +249,4 @@ def internal_error(error):
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
-            debug=False)
+            debug=True)

@@ -67,4 +67,12 @@
         <h3 class="center-align">No Results Found</h3>
     {% endif %}
 
+    <!-- PAGINATION CONTAINER -->
+    <div class="pagination">
+        {% if classes|length > 0 %}
+            {{ pagination.links }}
+            {{ pagination.info }}
+        {% endif %}
+    </div>
+
 {% endblock %}
