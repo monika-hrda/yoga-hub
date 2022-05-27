@@ -6,6 +6,7 @@ from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_paginate import Pagination
+from dateutil.parser import parse
 if os.path.exists("env.py"):
     import env
 
@@ -36,7 +37,7 @@ def get_classes():
     # get the clases only for the page requested, since results start at 0,
     # and the page is 1, we need to reset the skip to page - 1 
     # and then mutltiply by the classes per page
-    classes = mongo.db.classes.find({}).skip((page-1)*PER_PAGE).limit(PER_PAGE)
+    classes = mongo.db.classes.find({}).sort([("date_parsed", 1)]).skip((page-1)*PER_PAGE).limit(PER_PAGE)
 
     # count total number of classes / documents
     total = mongo.db.classes.count_documents({})
@@ -47,7 +48,8 @@ def get_classes():
     )
 
     return render_template(
-        "classes.html", classes=list(classes),  pagination=pagination
+        "classes.html", classes=list(classes),
+        pagination=pagination
     )
 
 
@@ -139,8 +141,8 @@ def profile(username):
 
     page = request.args.get('page', type=int, default=1)
     profile_classes = mongo.db.classes.find(
-        {"created_by": username_in_session}).skip(
-            (page-1)*PER_PAGE).limit(PER_PAGE)
+        {"created_by": username_in_session}).sort(
+            [("date_parsed", 1)]).skip((page-1)*PER_PAGE).limit(PER_PAGE)
     total = mongo.db.classes.count_documents(
         {"created_by": username_in_session})
     pagination = Pagination(
@@ -176,12 +178,13 @@ def add_class():
             "location": request.form.get("location"),
             "price": request.form.get("price"),
             "contact": request.form.get("contact"),
-            "created_by": session["user"]
+            "created_by": session["user"],
+            "date_parsed": parse(request.form.get("date"))
         }
 
         mongo.db.classes.insert_one(new_class)
         flash("Class Added Successfully")
-        return redirect(url_for("get_classes"))
+        return redirect(url_for("profile", username=session["user"]))
 
     styles = mongo.db.styles.find().sort("class_style", 1)
     return render_template("add_class.html", styles=styles)
@@ -200,7 +203,8 @@ def edit_class(class_id):
             "location": request.form.get("location"),
             "price": request.form.get("price"),
             "contact": request.form.get("contact"),
-            "created_by": session["user"]
+            "created_by": session["user"],
+            "date_parsed": parse(request.form.get("date"))
         }
         mongo.db.classes.update_one(
             {"_id": ObjectId(class_id)}, {"$set": submit})
@@ -235,7 +239,7 @@ def search():
     page = request.args.get('page', type=int, default=1)
 
     classes = list(mongo.db.classes.find(
-        {"$text": {"$search": query}}).skip((page-1)*PER_PAGE).limit(PER_PAGE))
+        {"$text": {"$search": query}}).sort([("date_parsed", 1)]).skip((page-1)*PER_PAGE).limit(PER_PAGE))
     total = len(list(mongo.db.classes.find({"$text": {"$search": query}})))
 
     pagination = Pagination(
@@ -262,4 +266,4 @@ def internal_error(error):
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
-            debug=False)
+            debug=True)
