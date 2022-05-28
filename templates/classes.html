@@ -10,7 +10,7 @@
                 <div class="col s12 m10 search-area">
                     <div class="input-field search-input-field">
                         <i class="fas fa-search prefix"></i>
-                        <input type="text" name="query" id="query" minlength="3" class="validate" required>
+                        <input type="text" name="query" id="query" minlength="3">
                         <label for="query">Search Classes</label>
                     </div>
                     <div class="search-button-field">
@@ -19,6 +19,27 @@
                         </button>
                         <a href="{{ url_for('get_classes') }}" class="btn">Reset</a>
                     </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- FILTER -->
+    <div class="row">
+        <form action="{{ url_for('get_classes') }}" method="POST" class="col s12">
+            <div class="row valign-wrapper">
+                <div class="col s12 m10 input-field">
+                    <i class="fas fa-folder-open prefix"></i>
+                    <select id="class_style" name="class_style">
+                        <option value="" disabled selected>Filter by Style</option>
+                        <option value="All">All Styles</option>
+                        {% for style in styles %}
+                            <option value="{{ style.class_style }}">{{ style.class_style }}</option>
+                        {% endfor %}
+                    </select>
+                    <label for="class_style">Class Style</label>
+                </div>
+                <div class="col s12">
+                    <input type="submit" value="Filter" class="light-blue darken-1 btn" />
                 </div>
             </div>
         </form>
@@ -64,7 +85,7 @@
             {% endfor %}
         </div>
     {% else %}
-        <h3 class="center-align">No Results Found</h3>
+        <h4 class="center-align">No Results Found</h4>
     {% endif %}
 
     <!-- PAGINATION CONTAINER -->

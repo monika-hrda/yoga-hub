@@ -20,6 +20,7 @@ app.secret_key = os.environ.get("SECRET_KEY")
 mongo = PyMongo(app)
 cached_query = ""
 PER_PAGE = 6
+style = None
 
 
 @app.route("/")
@@ -28,27 +29,43 @@ def home():
     return render_template("home.html")
 
 
-@app.route("/classes")
+@app.route("/classes", methods=["GET", "POST"])
 def get_classes():
 
-    # get the page parameter from the query string in the url
-    page = request.args.get('page', type=int, default=1)
+    global style
+    classes = None
+    total = None
 
-    # get the clases only for the page requested, since results start at 0,
-    # and the page is 1, we need to reset the skip to page - 1 
-    # and then mutltiply by the classes per page
-    classes = mongo.db.classes.find({}).sort([("date_parsed", 1)]).skip((page-1)*PER_PAGE).limit(PER_PAGE)
+    if request.method == "POST":
+        style = request.form["class_style"]
+        # reset site by changing style option to 'All Styles'
+        if style == "All":
+            style = None
 
-    # count total number of classes / documents
-    total = mongo.db.classes.count_documents({})
+    page = request.args.get("page", type=int, default=1)
 
-    # set the page parameters
+    if style:
+        total = mongo.db.classes.count_documents({"class_style": style})
+        if total > page * PER_PAGE:
+            page = 1
+        classes = mongo.db.classes.find({"class_style": style}).sort(
+            [("date_parsed", 1)]).skip((page-1)*PER_PAGE).limit(PER_PAGE)
+    else:
+        classes = mongo.db.classes.find({}).sort(
+            [("date_parsed", 1)]).skip((page-1)*PER_PAGE).limit(PER_PAGE)
+        total = mongo.db.classes.count_documents({})
+        style = None
+
     pagination = Pagination(
-        per_page=PER_PAGE, page=page, total=total, record_name='classes'
+        per_page=PER_PAGE, page=page, total=total, record_name="classes"
     )
 
+    styles = mongo.db.styles.find().sort("class_style", 1)
+
     return render_template(
-        "classes.html", classes=list(classes),
+        "classes.html",
+        classes=list(classes),
+        styles=styles,
         pagination=pagination
     )
 
