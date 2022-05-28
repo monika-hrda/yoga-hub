@@ -20,7 +20,6 @@ app.secret_key = os.environ.get("SECRET_KEY")
 mongo = PyMongo(app)
 cached_query = ""
 PER_PAGE = 6
-style = None
 
 
 @app.route("/")
@@ -32,39 +31,60 @@ def home():
 @app.route("/classes", methods=["GET", "POST"])
 def get_classes():
 
-    global style
+    style = None
     classes = None
     total = None
-
-    if request.method == "POST":
-        style = request.form["class_style"]
-        # reset site by changing style option to 'All Styles'
-        if style == "All":
-            style = None
+    pagination = None
 
     page = request.args.get("page", type=int, default=1)
 
+    styles = mongo.db.styles.find().sort("class_style", 1)
+
+    # if the args do not contain the word 'page',
+    # then it is substituted for the class style
+    if not request.args.get("page"):
+        for key, value in request.args.to_dict().items():
+            style = key
+            page = int(value)
+
+        # show all results when style set to 'All Styles'
+        if style == 'All':
+            style = None
+
+    if request.method == "POST":
+        # default the page to 0
+        page = 1
+        style = request.form['class_style']
+
+        if style == 'All':
+            style = None
+
+    # if the style is True, render a different pagination query string
     if style:
         total = mongo.db.classes.count_documents({"class_style": style})
-        if total > page * PER_PAGE:
-            page = 1
-        classes = mongo.db.classes.find({"class_style": style}).sort(
-            [("date_parsed", 1)]).skip((page-1)*PER_PAGE).limit(PER_PAGE)
+        classes = list(mongo.db.classes.find({"class_style": style}).sort(
+            [("date_parsed", 1)]).skip((page-1)*PER_PAGE).limit(PER_PAGE))
+
+        # instead of 'page', set the yoga style as the page parameter,
+        # its value will still be the page number
+        pagination = Pagination(
+            page_parameter=f'{style}', per_page=PER_PAGE, page=page, 
+            total=total, record_name='classes'
+        )
+
     else:
-        classes = mongo.db.classes.find({}).sort(
-            [("date_parsed", 1)]).skip((page-1)*PER_PAGE).limit(PER_PAGE)
+        classes = list(mongo.db.classes.find({}).sort(
+            [("date_parsed", 1)]).skip((page-1)*PER_PAGE).limit(PER_PAGE))
         total = mongo.db.classes.count_documents({})
-        style = None
 
-    pagination = Pagination(
-        per_page=PER_PAGE, page=page, total=total, record_name="classes"
-    )
-
-    styles = mongo.db.styles.find().sort("class_style", 1)
+        pagination = Pagination(
+            page_parameter='page', per_page=PER_PAGE, page=page, 
+            total=total, record_name='classes',
+        )
 
     return render_template(
         "classes.html",
-        classes=list(classes),
+        classes=classes,
         styles=styles,
         pagination=pagination
     )
