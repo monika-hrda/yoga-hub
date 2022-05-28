@@ -94,16 +94,25 @@ button.btn-large, button::after {
 
 /* ---------------------------------------- Search area */
 
-.search-button-field, .search-input-field {
-    display: inline-block;
+.fa-folder-open {
+    position: relative;
+    width: 3rem;
+    font-size: 2rem;
+    -webkit-transition: color .2s;
+    transition: color .2s;
+    top: 2.7rem;
 }
 
-.search-input-field {
-    width: 70%;
+form .input-field {
+    margin: 0;
 }
 
-.search-area {
-    margin:auto;
+.form-buttons {
+    text-align: end;
+}
+
+.form-buttons input[type='submit'] {
+    width: 86px;
 }
 
 /* ---------------------------------------- Yoga Classes on Cards */
@@ -157,6 +166,8 @@ button.btn-large, button::after {
 .pagination .active .page-link {
     padding: 4px 10px;
 }
+
+
 
 /* ---------------------------------------- Footer */
 
