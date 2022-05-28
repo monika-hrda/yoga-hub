@@ -48,15 +48,15 @@ def get_classes():
             page = int(value)
 
         # show all results when style set to 'All Styles'
-        if style == 'All':
+        if style == "All":
             style = None
 
     if request.method == "POST":
         # default the page to 0
         page = 1
-        style = request.form['class_style']
+        style = request.form["class_style"]
 
-        if style == 'All':
+        if style == "All":
             style = None
 
     # if the style is True, render a different pagination query string
@@ -68,8 +68,8 @@ def get_classes():
         # instead of 'page', set the yoga style as the page parameter,
         # its value will still be the page number
         pagination = Pagination(
-            page_parameter=f'{style}', per_page=PER_PAGE, page=page, 
-            total=total, record_name='classes'
+            page_parameter=f"{style}", per_page=PER_PAGE, page=page, 
+            total=total, record_name="classes"
         )
 
     else:
@@ -78,8 +78,8 @@ def get_classes():
         total = mongo.db.classes.count_documents({})
 
         pagination = Pagination(
-            page_parameter='page', per_page=PER_PAGE, page=page, 
-            total=total, record_name='classes',
+            page_parameter="page", per_page=PER_PAGE, page=page,
+            total=total, record_name="classes"
         )
 
     return render_template(
@@ -183,7 +183,7 @@ def profile(username):
     total = mongo.db.classes.count_documents(
         {"created_by": username_in_session})
     pagination = Pagination(
-        per_page=PER_PAGE, page=page, total=total, record_name='classes'
+        per_page=PER_PAGE, page=page, total=total, record_name="classes"
     )
 
     return render_template(
@@ -273,18 +273,23 @@ def search():
     else:
         query = cached_query
 
-    page = request.args.get('page', type=int, default=1)
+    page = request.args.get("page", type=int, default=1)
 
-    classes = list(mongo.db.classes.find(
-        {"$text": {"$search": query}}).sort([("date_parsed", 1)]).skip((page-1)*PER_PAGE).limit(PER_PAGE))
+    styles = mongo.db.styles.find().sort("class_style", 1)
+
+    classes = list(mongo.db.classes.find({"$text": {"$search": query}}).sort(
+        [("date_parsed", 1)]).skip((page-1)*PER_PAGE).limit(PER_PAGE))
     total = len(list(mongo.db.classes.find({"$text": {"$search": query}})))
 
     pagination = Pagination(
-        per_page=PER_PAGE, page=page, total=total, record_name='classes'
+        per_page=PER_PAGE, page=page, total=total, record_name="classes"
     )
 
     return render_template(
-        "classes.html", classes=classes,  pagination=pagination
+        "classes.html",
+        classes=classes,
+        styles=styles,
+        pagination=pagination
     )
 
 
