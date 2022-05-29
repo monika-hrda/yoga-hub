@@ -107,8 +107,7 @@ def register():
 
         register = {
             "username": username,
-            "password": generate_password_hash(password),
-            "is_teacher": "no"
+            "password": generate_password_hash(password)
         }
         mongo.db.users.insert_one(register)
 

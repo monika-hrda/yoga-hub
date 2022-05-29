@@ -3,7 +3,8 @@ _“You are only one yoga class away from a good mood.”_
 
 The web application was built as my third milestone project for Code Institute's Full Stack Software Development course. It is a full-stack site that allows its users to store and manipulate data records about a yoga domain. The topic for the project was chosen because of my own yoga journey and those of my fellow yoga teachers in training. The app was designed with me/us using it in the future in mind. 
 
-You can view the live website [here]( "Yoga Hub"). 
+![yoga hub](docs/readme-img/am-i-responsive.jpg)
+
 ***
 ## User Experience (UX)
 
@@ -82,27 +83,146 @@ As a registered / logged in user, in addition to the above, I want to be able to
 
 ### Design
 
+The site is designed with light theme in mind, characteristic for yoga studios and websites. 
+
 * #### Colour Scheme
+    The colour scheme is simple, using white background, and contrasting bright colors for most of its elements, including text. The scheme which served as an inspiration can be seen on [Coolors](https://coolors.co/b82677-a9d2cc-eb7545-f4f5f7-211f20).
 
 * #### Typography
+    Materilize's typography has been used throughout the site.
 
 * #### Imagery
+    Images of people in various yoga poses taking part in group classes have been used throughout the site to make the purpose of the website obvious and the site inspiring and esthetically pleasing.
 
 ***
-## Development Process
+## Notes on Development Process
 
 * Trello Board has been used since the beginning of development to track progress, capture ideas, and make notes
 ![trello board](docs/readme-img/trello-board.jpg)
 
+* MaterializeCSS was chosen as a responsive CSS framework, mostly due to learning purposes, as I have been using Bootstrap extensively in the past and wanted to compare those two. I also liked the resulting look, as well as was aware of Materialize's shortcomings (especially it not being actively maintained).
+
+* Changes to design - Originally, Materialize's Collapsible element was chosen to display individual classes. I then decided to showcase the classes a little bit more and create larger cards with the classes details on them, including an image.
+
 ***
 ## Database Design
+
+MongoDB was used to store data for this site in a database. The data has been set out in three collections - classes, users, styles. See an example below: 
+
+**Collection: styles**
+
+{<br>
+    "_id": unique value,<br>
+    "class_style":"Hatha"<br>
+}
+
+**Collection: classes**
+
+{<br>
+    "_id": unique value,<br>
+    "class_name":"Morning Vinyasa Flow with Susie",<br>
+    "class_style":"Vinyasa",<br>
+    "description":"Start the day Vinyasa style!",<br>
+    "date":"30 June, 2022",<br>
+    "is_online":"yes",<br>
+    "location":"Zoom",<br>
+    "price":"12",<br>
+    "contact":"susie@susie.ie",<br>
+    "created_by":"susie",<br>
+    "date_parsed":{"$date":{"$numberLong":"1656547200000"}}<br>
+}
+
+**Collection: users**
+
+{<br>
+    "_id": unique value,<br>
+    "username":"susie",<br>
+    "password": unique value<br>
+}
+
+### Security
+
+Database connection details are set up in an env.py for development, for security reasons this is not uploaded to GitHub so that database and connection details are not visible to users. In production these are stored in Heroku.
 
 ***
 ## Features
 
 ### Existing Features
 
+* **Home Page**
+    * Features a large hero image and text "Find Your Perfect Yoga Class" to help users understand the purpose of the website. 
+    * There is a large button leading users to a page with collection of yoga classes.
+    * A call to yoga teachers invites them to register on the website and post their classes for the community to attend.
+
+* **Register functionality for teachers**
+    * Asks users to create a unique username and enter their chosen password twice (the backend checks these two are matching).
+    * User is then redirected to their profile page.
+
+* **Login functionality for teachers**
+    * Allows registered users to log in.
+    * User is then redirected to their profile page.
+
+* **Profile Page**
+    * Filters classes by user and shows only classes created by the logged in user. 
+    * Add New Class button is placed on the page.
+
+* **Navigation**
+    * Navigation responds to and updates with different links based on whether user is logged in or not.
+
+* **Main Classes Page**
+    * Displays all yoga classes hosted on the site. 
+
+* **Search functionality**
+    * A text based search is implemented on all the yoga classes. 
+    * It takes an input from the user and searches the classes collection - specifically the class_name, description, and location fields.
+
+* **Filter by yoga style functionality**
+    * User can filter classes based on a yoga style of their choosing. This makes their classes lookup even easier.
+
+* **Sorted by Date**
+    * All yoga classes on the site are sorted by date in ascending order to make the lookup easier for the user.
+
+* **Pagination**
+    * Pagination is implemented on all pages (all classes display, search results, filtered results, collection of the logged in user's classes)
+
+* **Add New Class**
+    * Allows user to create a new class by filling in all the required fields.
+    * There is front end as well as back end **validation** implemented on all the input fields. It also gives user a feedback in real time.
+
+* **Ability to Edit Class**
+    * User has the ability to edit only the classes they created themselves.
+    * **Validation** is implemented on all the input fields.
+
+* **Ability to Delete Class**
+    * User can delete only the classes they created themselves.
+
+* **Defensive programming**
+    * Confirmation of deletion request. Prompts user to confirm deletion of a class.
+    * User cannot access another user's profile page or details by typing in URL with their username. If they try, they are redirected to the login page.
+
+* **Footer**
+    * Contains copyright information, as well as links to the admin's (website creator's) GitHub and LinkedIn pages.
+
+* **Custom 404 and 500 Error Pages**
+    * To handle internal and not_found errors gracefully. 
+
+* **Favicon**
+
+* **The site is fully responsive**
+
 ### Features Left to Implement in the Future
+
+* Create two types of users - teachers and regular users. (At the moment, there is no need for this.)
+* Allow regular users to save events for themselves, so that they can access them easier in the future. Display these saved classes on their profile page.
+* Further filters based on location, live/online events, teacher.
+* Option for teachers to create a repeat event.
+* User verification - to check that all logged in users (teachers) are accredited yoga teachers.
+* Ability to select various tags on classes - e.g. outdoor, indoor, online, Zoom, Hatha.. - for easier search and also to make the content of the classes more visually obvious to users.
+* Various images showcasing different styles of yoga implemented on the classes cards.
+* Visual calendar with classes on.
+* FAQ.
+* Online booking.
+* Online payment.
 
 ***
 ## Technologies Used
@@ -136,6 +256,7 @@ As a registered / logged in user, in addition to the above, I want to be able to
 * [Trello](https://www.trello.com/) - to project manage, Kanban-style
 * [https://imagecompressor.com/](https://imagecompressor.com/) - to compress image files
 * [https://favicon.io/](https://favicon.io/favicon-converter/) - to generate favicon
+* [amiresponsive](https://ui.dev/amiresponsive?url=https://yoga-hub.herokuapp.com/home)
 
 ***
 ## Testing
@@ -152,6 +273,8 @@ During the development process, the application was continuously tested and bugs
 ![bug showing username in url not matching logged in user's username](docs/readme-img/profile-page-bug.jpg)
 
 ### Known Bugs and Issues
+
+There are currently no known bugs or issues present.
 
 ***
 ## Deployment
@@ -228,7 +351,11 @@ This project can be forked following these steps:
 4. Use your IDE of choice to open its terminal
 5. Change the current working directory to the location where you want the cloned directory
 6. Type `git clone` and then paste the previously copied URL
-7. Press enter to locate your local clone  
+7. Press enter to create your local clone
+8. Create the above described env.py file with your own values
+9. You will also need to create a MongoDB database matching the one described above
+10. Install the project requirements by using the command `pip3 install -r requirements.txt`
+11. Type `python3 app.py` in your terminal to run the program
 
 ***
 ## Credits
