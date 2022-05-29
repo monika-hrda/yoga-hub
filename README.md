@@ -156,6 +156,80 @@ During the development process, the application was continuously tested and bugs
 ***
 ## Deployment
 
+### Requirements for Deployment
+
+* GitHub account
+* Python
+* MongoDB account
+* Heroku account
+
+### Heroku Deployment
+
+This project was deployed on Heroku following these steps:
+
+#### Requirements.txt and Procfile
+
+Create these files using these steps in (GitPod) terminal:
+
+1. Type `pip3 freeze -–local > requirements.txt` to create a requirements file (it keeps track of the Python dependencies that we've installed for our project)
+2. Type `echo web: python3 run.py > Procfile` to create Procfile (a Heroku-specific type of file that tells Heroku how to run our project)
+3. Delete any additional empty lines after the line `web: python app.py`
+4. Push these two files into your depository
+
+#### Environment Variables
+
+Create an env.py file with the following information: 
+
+```
+import os
+
+os.environ.setdefault("IP", "0.0.0.0")
+os.environ.setdefault("PORT", "5000")
+os.environ.setdefault("SECRET_KEY", " unique secret key")
+os.environ.setdefault("MONGO_URI", " unique uri from mongodb ")
+os.environ.setdefault("MONGO_DBNAME", " database name ")
+```
+
+As this file contains sensitive information, it needs to be added to the .gitignore file to not be pushed to GitHub
+
+#### Create Heroku App
+
+1. Log in to Heroku
+2. Select 'Create New App' from the dashboard
+3. Choose an app name (each name has to be unique, if app with that name exists already, a different name will have to be chosen)
+4. Select the region based on your location
+5. Click 'Create App'
+6. Add config vars to Heroku - go to Heroku Settings tab, click on Reveal Config Vars, enter your above described environment variables
+7. In your CLI install Heroku by typing `npm install -g heroku`
+
+#### Deploying our App to Heroku
+
+1. Login to Heroku by typing `heroku login -i`
+2. Get your app name from Heroku by typing command `heroku apps`
+3. Set the Heroku remote (replace the <app_name> with your actual app name): `heroku git:remote -a <app_name>`
+4. Add, commit, and push to GitHub (commands `git add .` & `git commit -m "Deploy to Heroku via CLI"`)
+5. Push to GitHub `git push origin main`
+6. Push to Heroku `git push heroku main`
+7. Your Heroku app will be built and you will see your deployed app's URL
+
+### Forking the Repository
+
+This project can be forked following these steps: 
+
+1. Log in to GitHub and locate this project (you are most likely here). 
+2. Locate the Fork button at the top right corner of the page and click on it. 
+3. A copy of the original repository is in your GitHub account
+
+### Local Clone
+
+1. Navigate to this GitHub repository (you are most likely here)
+2. Click on the Code dropdown
+3. Copy the URL of the repository in the HTTPS tab
+4. Use your IDE of choice to open its terminal
+5. Change the current working directory to the location where you want the cloned directory
+6. Type `git clone` and then paste the previously copied URL
+7. Press enter to locate your local clone  
+
 ***
 ## Credits
 
@@ -165,6 +239,7 @@ During the development process, the application was continuously tested and bugs
 * [Materialize documentation](https://materializecss.com/) with code snippets
 * [Materialize on GitHub](https://github.com/Dogfalo/materialize)
 * [MongoDB documentation](https://www.mongodb.com/docs/)
+* [demo for how to use flask-paginate](https://gist.github.com/mozillazg/69fb40067ae6d80386e10e105e6803c9)
 
 ### Content
 
