@@ -134,6 +134,8 @@ As a registered / logged in user, in addition to the above, I want to be able to
 * [Balsamiq](https://balsamiq.com/wireframes/) - to create wireframes
 * [Lucidchart](https://www.lucidchart.com/) - to create user journey (flowchart)
 * [Trello](https://www.trello.com/) - to project manage, Kanban-style
+* [https://imagecompressor.com/](https://imagecompressor.com/) - to compress image files
+* [https://favicon.io/](https://favicon.io/favicon-converter/) - to generate favicon
 
 ***
 ## Testing
@@ -166,7 +168,12 @@ During the development process, the application was continuously tested and bugs
 
 ### Content
 
+Content written by Monika Hrda.
+
 ### Media
+
+* all yoga related images sourced from [Pexels](https://www.pexels.com/)
+* image used as favicon found on [PxHere](https://pxhere.com/)
 
 ### Acknowledgements
 

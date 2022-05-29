@@ -48,6 +48,14 @@ input.select-dropdown {
     color: #9e9e9e;
 }
 
+.datepicker-date-display {
+    background-color: var(--violet-red);
+}
+
+.dropdown-content li>a, .dropdown-content li>span {
+    color: var(--violet-red);
+}
+
 /* ---------------------------------------- Header */
 
 nav {
@@ -62,6 +70,46 @@ nav .nav-wrapper {
     padding: 0 2%;
 }
 
+/* ---------------------------------------- Home page */
+
+#hero-image {
+    background-image: url("../images/yoga-hub-1.jpg");
+    background-size: cover;
+    height: 80vh;
+    width: 100%;
+    display: flex;
+    background-position: top center;
+}
+
+.hero-text-overlay {
+    background-color: rgba(226, 230, 222, 0.4);
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 20%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 80px;
+    height: 170px;
+    width: 50%;
+    padding: 20px;
+    padding-top: 10px;
+}
+
+.hero-heading {
+    font-size: 7vmin;
+}
+
+.hero-text {
+    font-size: 3vmax;
+    margin-top: 75px;
+}
+
+.about-heading {
+    padding: 10px;
+    font-size: 1.7rem;
+}
+
 /* ---------------------------------------- Buttons */
 
 button.btn-large, button::after {
@@ -71,7 +119,6 @@ button.btn-large, button::after {
 
 .btn-large:hover, .btn-large:focus, .btn-small:hover, .btn-small:focus {
     background: white;
-    /* box-shadow: 0 0 10px #000; */
     box-shadow: 3px 6px 10px #888888;
 }
 
@@ -84,6 +131,22 @@ button.btn-large, button::after {
     bottom: 60px;
     right: 10px;
 }
+
+.hero-button .btn-large {
+    color: white;
+    background-color: var(--violet-red);
+    box-shadow: none;
+ }
+
+ .hero-button .btn-large:hover {
+    background-color: #831954;
+    transition: .4;
+    opacity: 0.9;
+ }
+
+ .btn-small.register-btn {
+     background-color: var(--violet-red);
+ }
 
 /* ---------------------------------------- Flash messages */
 
@@ -146,6 +209,7 @@ form .input-field {
     margin-top: 0px;
     display: inline-block;
     vertical-align: middle;
+    width: auto;
 }
 
 .pagination li {
@@ -207,5 +271,25 @@ form .input-field {
 
     ul.social-links {
         text-align: center;
+    }
+
+    .hero-heading {
+        font-size: 8vmin;
+    }
+    
+    .hero-text {
+        font-size: 5vmin;
+        /* font-size: 7vmin; */
+        margin-top: 35px;
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    h2 {
+        font-size: 2.5rem;
+    }
+
+    #hero-image {
+        height: 60vh;
     }
 }

@@ -1,6 +1,24 @@
 {% extends "base.html" %}
 {% block content %}
 
-    <h1 class="center-align">Yoga Hub <i class="fa-solid fa-sun medium"></i></h1>
+    <div id="hero-image">
+        <div class="hero-text-overlay">
+            <h1 class="hero-heading center-align white-text">Yoga Hub <i class="fa-solid fa-sun medium"></i></h1>
+            <h3 class="hero-text center-align white-text">Find Your Perfect Yoga Class</h3>
+            <div class="center-align hero-button">
+                <a href="{{ url_for('get_classes') }}" class="btn-large">
+                    Classes
+                </a>
+            </div>
+          </div>      
+    </div>
+
+    <h3 class="about-heading center-align">Are you a yoga teacher?</h3>
+    <p class="center-align">Join our ever expanding community of yoga teachers and promote your next yoga class.</p>
+    <div class="center-align">
+        <a href="{{ url_for('register') }}" class="btn-small register-btn">
+            Register
+        </a>
+    </div>
 
 {% endblock %}
