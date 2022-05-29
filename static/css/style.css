@@ -140,7 +140,7 @@ button.btn-large, button::after {
 
  .hero-button .btn-large:hover {
     background-color: #831954;
-    transition: .4;
+    transition: 0.4s;
     opacity: 0.9;
  }
 
@@ -290,6 +290,6 @@ form .input-field {
     }
 
     #hero-image {
-        height: 60vh;
+        height: 75vh;
     }
 }
