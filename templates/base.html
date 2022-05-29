@@ -90,21 +90,15 @@
             <div class="col s12 m6">
                 <ul class="social-links right-align">
                     <li>
-                        <a href="https://www.facebook.com/" target="_blank" rel="noopener">
-                            <i class="fab fa-facebook-square" aria-hidden="true"></i>
-                            <span class="sr-only">Facebook</span>
+                        <a href="https://github.com/monika-hrda" target="_blank">
+                            <i class="fab fa-brands fa-github" role="img" aria-label="GitHub"></i>
+                            <span class="sr-only">GitHub</span>
                         </a>
                     </li>
                     <li>
-                        <a href="https://www.instagram.com/" target="_blank" rel="noopener">
-                            <i class="fab fa-instagram" aria-hidden="true"></i>
-                            <span class="sr-only">Instagram</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://www.youtube.com/" target="_blank" rel="noopener">
-                            <i class="fab fa-youtube" aria-hidden="true"></i>
-                            <span class="sr-only">YouTube</span>
+                        <a href="https://www.linkedin.com/in/monikahrda/" target="_blank">
+                            <i class="fab fa-brands fa-linkedin" role="img" aria-label="LinkedIn"></i>
+                            <span class="sr-only">LinkedIn</span>
                         </a>
                     </li>
                 </ul>
@@ -120,5 +114,7 @@
     <!-- Link to JavaScript file & no script error -->
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
     <noscript>Your browser does not support JavaScript!</noscript>
+    {% block scripts %}
+    {% endblock %}
 </body>
 </html>

@@ -65,28 +65,22 @@ def get_classes():
         classes = list(mongo.db.classes.find({"class_style": style}).sort(
             [("date_parsed", 1)]).skip((page-1)*PER_PAGE).limit(PER_PAGE))
 
-        # instead of 'page', set the yoga style as the page parameter,
-        # its value will still be the page number
-        pagination = Pagination(
-            page_parameter=f"{style}", per_page=PER_PAGE, page=page, 
-            total=total, record_name="classes"
-        )
-
     else:
         classes = list(mongo.db.classes.find({}).sort(
             [("date_parsed", 1)]).skip((page-1)*PER_PAGE).limit(PER_PAGE))
         total = mongo.db.classes.count_documents({})
 
-        pagination = Pagination(
-            page_parameter="page", per_page=PER_PAGE, page=page,
-            total=total, record_name="classes"
-        )
+    pagination = Pagination(
+        page_parameter="page", per_page=PER_PAGE, page=page,
+        total=total, record_name="classes"
+    )
 
     return render_template(
         "classes.html",
         classes=classes,
         styles=styles,
-        pagination=pagination
+        pagination=pagination,
+        style=style
     )
 
 

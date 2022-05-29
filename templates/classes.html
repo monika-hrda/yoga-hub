@@ -89,3 +89,29 @@
     </div>
 
 {% endblock %}
+
+{% block scripts %}
+    <script>
+        const style = '{{ style }}';
+        const links = document.querySelectorAll('a.page-link');
+
+        links.forEach(link => {
+            if (style !== 'None' && window.location.href.includes('classes')) {
+                const href = link.getAttribute('href');
+                const prev = '{{pagination.page - 1}}';
+                const next = '{{pagination.page + 1}}';
+
+                if (href) {
+                    const base = link.href.split('?')[0];
+                    link.href = `${base}?${style}=${link.innerText}`
+
+                    if (link.innerText.includes('Previous'))
+                        link.href = `${base}?${style}=${prev}`
+
+                    if (link.innerText.includes('Next'))
+                        link.href = `${base}?${style}=${next}`
+                }
+            }
+        })
+    </script>
+{% endblock %}
